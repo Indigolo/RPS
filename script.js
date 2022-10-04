@@ -1,35 +1,124 @@
 function getComputerChoice(){
-    
+
     let rng = Math.floor((Math.random() * 3)) + 1;
 
     if(rng == 1)
-    return choice = "Rock";
+    return "rock";
     
 
     else if(rng == 2)
-    return choice = "Paper";
+    return "paper";
     
 
     else
-    return choice = "Scissors";
+    return "scissors";
     
     
 }
 
-function round(playerSelection, computerSelection){
+function playRound(playerSelection, computerSelection){
 
     if(playerSelection == computerSelection)
-    alert("Draw");
+    return "Draw";
 
-    else if(playerSelection.toUpperCase() == "ROCK" && computerSelection.toUpperCase() == "SCISSORS")
-    alert("Victory");
+    else if(playerSelection == "rock" && computerSelection == "scissors")
+    return true;
 
-    else if(playerSelection.toUpperCase() == "PAPER" && computerSelection.toUpperCase() == "ROCK")
-    alert("Victory");
+    else if(playerSelection == "paper" && computerSelection == "rock")
+    return true;
 
-    else if(playerSelection.toUpperCase() == "SCISSORS" && computerSelection.toUpperCase() == "PAPER")
-    alert("Victory");
+    else if(playerSelection == "scissors" && computerSelection == "paper")
+    return true;
 
-    else
-    alert("Defeat");
+    return false;
 }
+
+const result = document.createElement('div');
+document.body.appendChild(result);
+
+
+const rock = document.createElement('button');
+rock.textContent = "rock";
+
+const paper = document.createElement('button');
+paper.textContent = "paper";
+
+const scissors = document.createElement('button');
+scissors.textContent = "scissors";
+
+document.body.appendChild(rock);
+document.body.appendChild(paper);
+document.body.appendChild(scissors);
+
+let win = 0;
+let loss = 0;
+
+rock.addEventListener('click', () => {
+  let answer = playRound("rock", getComputerChoice());
+
+  if(answer == "Draw")
+  result.textContent = win + " - " + loss;
+
+  else if(answer == true){
+    win += 1;
+    result.textContent = win + " - " + loss;
+  }
+
+  else{
+    loss += 1;
+    result.textContent = win + " - " + loss;
+  }
+
+  if(win == 5)
+    result.textContent = "Victory!";
+
+  else if(loss == 5)
+  result.textContent = "Loss";
+});
+
+paper.addEventListener('click', () => {
+    let answer = playRound("paper", getComputerChoice());
+
+    if(playRound("paper", getComputerChoice) == "Draw")
+    result.textContent = win + " - " + loss;
+  
+    else if(playRound("paper", getComputerChoice())){
+      win += 1;
+      result.textContent = win + " - " + loss;
+    }
+  
+    else{
+      loss += 1;
+      result.textContent = win + " - " + loss;
+    }
+
+    if(win == 5)
+    result.textContent = "Victory!";
+
+    else if(loss == 5)
+    result.textContent = "Loss";
+  });
+
+  scissors.addEventListener('click', () => {
+    let answer = playRound("scissors", getComputerChoice());
+
+    if(answer == "Draw")
+    result.textContent = win + " - " + loss;
+  
+    else if(answer){
+      win += 1;
+      result.textContent = win + " - " + loss;
+    }
+  
+    else{
+      loss += 1;
+      result.textContent = win + " - " + loss;
+    }
+
+    if(win == 5)
+    result.textContent = "Victory!";
+
+    else if(loss == 5)
+    result.textContent = "Loss";
+  });
+
